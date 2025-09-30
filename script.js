@@ -138,13 +138,7 @@ function drawWheel(rotation = 0) {
     ctx.rotate(startAngle + sliceAngle / 2);
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    
-    // Dynamic font size based on canvas size
-    const canvasDisplaySize = Math.min(centerX, centerY) * 2; // Get the actual display size
-    const fontSize = canvasDisplaySize >= 900 ? 22 : 18;
-    
-    ctx.font = `bold ${fontSize}px Quicksand, Arial, sans-serif`;
-    
+    ctx.font = 'bold 18px Quicksand, Arial, sans-serif';
     ctx.fillStyle = '#222';
     ctx.shadowColor = 'rgba(0,0,0,0.12)';
     ctx.shadowBlur = 4;
