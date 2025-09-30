@@ -369,5 +369,22 @@ window.addEventListener('resize', () => {
   drawWheel(currentAngle);
 });
 
+// Handle orientation changes on mobile devices
+window.addEventListener('orientationchange', () => {
+  // Small delay to ensure the orientation change is complete
+  setTimeout(() => {
+    drawWheel(currentAngle);
+  }, 100);
+});
+
+// Also listen for screen orientation API if available
+if (screen && screen.orientation) {
+  screen.orientation.addEventListener('change', () => {
+    setTimeout(() => {
+      drawWheel(currentAngle);
+    }, 100);
+  });
+}
+
 // Initial draw
 drawWheel();
