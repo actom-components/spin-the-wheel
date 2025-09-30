@@ -138,7 +138,13 @@ function drawWheel(rotation = 0) {
     ctx.rotate(startAngle + sliceAngle / 2);
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.font = 'bold 18px Quicksand, Arial, sans-serif';
+    
+    // Dynamic font size based on canvas size
+    const canvasDisplaySize = Math.min(centerX, centerY) * 2; // Get the actual display size
+    const fontSize = canvasDisplaySize >= 900 ? 22 : 18;
+    
+    ctx.font = `bold ${fontSize}px Quicksand, Arial, sans-serif`;
+    
     ctx.fillStyle = '#222';
     ctx.shadowColor = 'rgba(0,0,0,0.12)';
     ctx.shadowBlur = 4;
@@ -368,43 +374,6 @@ function hideConfetti() {
 window.addEventListener('resize', () => {
   drawWheel(currentAngle);
 });
-
-// Handle orientation changes on mobile devices
-window.addEventListener('orientationchange', () => {
-  // Small delay to ensure the orientation change is complete
-  setTimeout(() => {
-    console.log('Orientation change detected - redrawing wheel');
-    drawWheel(currentAngle);
-  }, 1000);
-});
-
-// Also listen for screen orientation API if available
-if (screen && screen.orientation) {
-  screen.orientation.addEventListener('change', () => {
-    setTimeout(() => {
-      console.log('Screen orientation API change detected - redrawing wheel');
-      drawWheel(currentAngle);
-    }, 1000);
-  });
-}
-
-// Additional fallback: detect viewport size changes that might indicate rotation
-let lastViewportWidth = window.innerWidth;
-let lastViewportHeight = window.innerHeight;
-
-setInterval(() => {
-  const currentWidth = window.innerWidth;
-  const currentHeight = window.innerHeight;
-  
-  // Check if dimensions changed significantly (possible rotation)
-  if (Math.abs(currentWidth - lastViewportWidth) > 100 || 
-      Math.abs(currentHeight - lastViewportHeight) > 100) {
-    console.log('Viewport size change detected - redrawing wheel');
-    drawWheel(currentAngle);
-    lastViewportWidth = currentWidth;
-    lastViewportHeight = currentHeight;
-  }
-}, 500);
 
 // Initial draw
 drawWheel();
