@@ -71,10 +71,35 @@ const centerX = canvas.width / 2;
 const centerY = canvas.height / 2;
 const radius = Math.min(centerX, centerY) - 5;
 
+// Function to scale canvas for high DPI and prevent blurriness
+function scaleCanvas() {
+  const rect = canvas.getBoundingClientRect();
+  const dpr = window.devicePixelRatio || 1;
+  
+  // Set the actual size of the canvas in memory
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  
+  // Scale the drawing context to match device pixel ratio
+  ctx.scale(dpr, dpr);
+  
+  // Set the canvas display size
+  canvas.style.width = rect.width + 'px';
+  canvas.style.height = rect.height + 'px';
+}
+
 let currentAngle = 0;  // Current rotation angle in radians
 let isSpinning = false;
 
 function drawWheel(rotation = 0) {
+  // Update canvas dimensions and scaling
+  scaleCanvas();
+  
+  // Recalculate center and radius based on new canvas size
+  const centerX = canvas.width / (window.devicePixelRatio || 1) / 2;
+  const centerY = canvas.height / (window.devicePixelRatio || 1) / 2;
+  const radius = Math.min(centerX, centerY) - 5;
+  
   const sliceAngle = (2 * Math.PI) / segments.length;
 
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -338,3 +363,11 @@ function showConfetti() {
 function hideConfetti() {
   confettiCanvas.style.display = 'none';
 }
+
+// Initialize canvas and handle window resize
+window.addEventListener('resize', () => {
+  drawWheel(currentAngle);
+});
+
+// Initial draw
+drawWheel();
