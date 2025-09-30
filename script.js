@@ -373,18 +373,38 @@ window.addEventListener('resize', () => {
 window.addEventListener('orientationchange', () => {
   // Small delay to ensure the orientation change is complete
   setTimeout(() => {
+    console.log('Orientation change detected - redrawing wheel');
     drawWheel(currentAngle);
-  }, 100);
+  }, 1000);
 });
 
 // Also listen for screen orientation API if available
 if (screen && screen.orientation) {
   screen.orientation.addEventListener('change', () => {
     setTimeout(() => {
+      console.log('Screen orientation API change detected - redrawing wheel');
       drawWheel(currentAngle);
-    }, 100);
+    }, 1000);
   });
 }
+
+// Additional fallback: detect viewport size changes that might indicate rotation
+let lastViewportWidth = window.innerWidth;
+let lastViewportHeight = window.innerHeight;
+
+setInterval(() => {
+  const currentWidth = window.innerWidth;
+  const currentHeight = window.innerHeight;
+  
+  // Check if dimensions changed significantly (possible rotation)
+  if (Math.abs(currentWidth - lastViewportWidth) > 100 || 
+      Math.abs(currentHeight - lastViewportHeight) > 100) {
+    console.log('Viewport size change detected - redrawing wheel');
+    drawWheel(currentAngle);
+    lastViewportWidth = currentWidth;
+    lastViewportHeight = currentHeight;
+  }
+}, 500);
 
 // Initial draw
 drawWheel();
