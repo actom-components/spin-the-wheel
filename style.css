@@ -134,14 +134,14 @@ body {
 /* Samsung Galaxy Tab A9+ Landscape (1920x1200) - for widths 1300px to 2000px */
 @media (min-width: 1300px) and (max-width: 2200px) {
   .wheel-container {
-    margin-bottom: 40px;
+    margin-bottom: 32px;
   }
 }
 
 /* Samsung Galaxy Tab A9+ Portrait (1200x1920) - for widths smaller than 1300px */
 @media (max-width: 1299px) {
   .wheel-container {
-    margin-bottom: 300px;
+    margin-bottom: 250px;
   }
 
   #wheel {
@@ -156,5 +156,9 @@ body {
     border-left: 70px solid transparent;
     border-right: 70px solid transparent;
     border-bottom: 110px solid #006cb8;
+  }
+
+  #logo {
+    margin-left: -27.2% !important;
   }
 }

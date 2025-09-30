@@ -163,7 +163,5 @@ input[type="number"]:focus {
 }
 
 @media (max-width: 1299px) {
-  #logo-bar {
-    height: 70px;
-  }
+
 }
