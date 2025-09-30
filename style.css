@@ -130,7 +130,7 @@ body {
   pointer-events: none;
 }
 
-@media (max-width: 950px) {
+/* @media (max-width: 950px) {
   .modal-content {
     font-size: 35px;
     min-width: 400px;
@@ -143,12 +143,12 @@ body {
     margin-top: 24vw !important;
   }
   
-  /* #wheel {
+  #wheel {
     width: 80vw !important;
     height: auto !important;
     max-width: 100vw !important;
     max-height: 100vw !important;
-  } */
+  }
 
   .arrow {
     border-left: 8vw solid transparent;
@@ -165,4 +165,17 @@ body {
     font-size: 22px;
     min-width: 220px;
   }
+} */
+
+
+/* Samsung Galaxy Tab A9+ Landscape (1920x1200) */
+@media (min-width: 1200px) and (max-width: 1920px) and (orientation: landscape) {
+  .wheel-container {
+    margin-top: 250px;
+  }
+}
+
+/* Samsung Galaxy Tab A9+ Portrait (1200x1920) */
+@media (min-width: 1200px) and (max-width: 1920px) and (orientation: portrait) {
+  
 }
