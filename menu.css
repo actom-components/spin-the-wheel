@@ -19,9 +19,10 @@ body {
   background: rgba(0,108,184,255);
   display: flex;
   align-items: center;
-  height: 70px;
+  height: 100px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
+
 #logo-bar img {
   height: 100%;
   margin-left: 0;
@@ -159,4 +160,10 @@ input[type="number"]:focus {
 
 .form-row input {
   width: 50px;
+}
+
+@media (max-width: 1299px) {
+  #logo-bar {
+    height: 70px;
+  }
 }
