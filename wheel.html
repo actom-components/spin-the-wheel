@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Actom Spin The Wheel</title>
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- Styles moved to style.css -->
+</head>
+<body>
+  <div id="logo-bar" style="position:fixed; top:0; left:0; width:100%; z-index:1000; background:rgba(0,108,184,255); text-align:left; cursor:pointer; display:flex; align-items:center;">
+    <img id="logo" src="ACTOM-logov2.png" alt="ACTOM Logo" style="display:inline-block; margin-left: -7.3%; width: 65%; max-width: 1000px; min-width: 400px; height: auto;">
+  </div>
+  <div class="wheel-container">
+    <div class="arrow"></div>
+    <canvas id="wheel" width="500" height="500"></canvas>
+    <button id="spin-button">SPIN</button>
+  </div>
+  
+  <canvas id="confetti-canvas"></canvas>
+  
+  <div id="win-modal" class="modal hidden">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <p id="prize-text">You won!</p>
+  </div>
+</div>
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('logo-bar').addEventListener('click', function() {
+      window.location.href = 'index.html';
+    });
+  </script>
+</body>
+</html>

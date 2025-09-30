@@ -1,0 +1,104 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Actom Spin The Wheel</title>
+  <link rel="stylesheet" href="menu.css" />
+  <link rel="preload" href="Quicksand-VariableFont_wght.ttf" as="font" type="font/ttf" crossorigin>
+</head>
+<body>
+  <div id="logo-bar">
+    <img src="ACTOM-logov2.png" alt="ACTOM Logo" id="logo" />
+  </div>
+  <div class="card">
+    <h1>Prize Setup</h1>
+    <form id="prize-form">
+      <div class="form-row"><label for="Cooler Bag">Cooler Bag:</label><input type="number" id="Cooler Bag" min="0" /></div>
+      <div class="form-row"><label for="Humidifier">Humidifier:</label><input type="number" id="Humidifier" min="0" /></div>
+      <div class="form-row"><label for="Water bottle">Water bottle:</label><input type="number" id="Water bottle" min="0" /></div>
+      <div class="form-row"><label for="Lip Ice">Lip Ice:</label><input type="number" id="Lip Ice" min="0" /></div>
+      <div class="form-row"><label for="Pen">Pen:</label><input type="number" id="Pen" min="0" /></div>
+      <div class="form-row"><label for="Desk fan">Desk fan:</label><input type="number" id="Desk fan" min="0" /></div>
+      <div class="form-row"><label for="Desk lamp">Desk lamp:</label><input type="number" id="Desk lamp" min="0" /></div>
+      <div class="form-row"><label for="Phone holder">Phone holder:</label><input type="number" id="Phone holder" min="0" /></div>
+      <div class="form-row"><label for="Umbrella">Umbrella:</label><input type="number" id="Umbrella" min="0" /></div>
+      <button id="save-settings" type="submit">Save Settings</button>
+      <!-- <button type="button" id="toggle-cooler">Remove cooler bag</button> -->
+    </form>
+    <a id="wheel-button" href="wheel.html">Spin the wheel</a>
+  </div>
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <span class="close-button">&times;</span>
+      <p>Settings saved successfully!</p>
+    </div>
+  </div>
+  <script>
+    const form = document.getElementById('prize-form');
+    const fields = [
+      "Cooler Bag", "Humidifier", "Water bottle", "Lip Ice", "Pen",
+      "Desk fan", "Desk lamp", "Phone holder", "Umbrella"
+    ];
+  
+    const modal = document.getElementById('modal');
+    const closeButton = document.querySelector('.close-button');
+  
+    window.onload = () => {
+      const savedStock = JSON.parse(localStorage.getItem('prizeStock')) || {};
+      fields.forEach(field => {
+        document.getElementById(field).value = savedStock[field] ?? '';
+      });
+    };
+  
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const prizeStock = {};
+      fields.forEach(field => {
+        prizeStock[field] = parseInt(document.getElementById(field).value, 10) || 0;
+      });
+      localStorage.setItem('prizeStock', JSON.stringify(prizeStock));
+  
+      // Show modal
+      modal.classList.remove('hidden');
+    });
+  
+    closeButton.addEventListener('click', () => {
+      modal.classList.add('hidden');
+    });
+  
+    // Optional: close modal by clicking outside
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.add('hidden');
+      }
+    });
+    
+    let coolerBagRemoved = localStorage.getItem('coolerBagRemoved') === 'true';
+
+    const coolerInput = document.getElementById('Cooler Bag');
+    const toggleCoolerBtn = document.getElementById('toggle-cooler');
+    
+    // On load, apply previous toggle state
+    if (coolerBagRemoved) {
+      coolerInput.disabled = true;
+      toggleCoolerBtn.textContent = 'Add cooler bag';
+    }
+    
+    toggleCoolerBtn.addEventListener('click', () => {
+      coolerBagRemoved = !coolerBagRemoved;
+      localStorage.setItem('coolerBagRemoved', coolerBagRemoved);
+    
+      if (coolerBagRemoved) {
+        coolerInput.value = 0;
+        coolerInput.disabled = true;
+        toggleCoolerBtn.textContent = 'Add cooler bag';
+      } else {
+        coolerInput.disabled = false;
+        toggleCoolerBtn.textContent = 'Remove cooler bag';
+      }
+    });
+  </script>
+</body>
+</html>
