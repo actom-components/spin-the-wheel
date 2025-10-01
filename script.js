@@ -5,7 +5,7 @@ const spinBtn = document.getElementById('spin-button');
 let originalSegments = [
   "Pen", "Spin Again", "Lip Ice", "Cooler Bag", "Pen",
   "Lip Ice", "Humidifier", "Pen", "Lip Ice",
-  "Water bottle", "Pen", "Lip Ice", "Desk fan", "Nothing",
+  "Water bottle", "Pen", "Lip Ice", "Desk fan",
   "Pen", "Lip Ice", "Desk lamp", "Pen",
   "Lip Ice", "Phone holder", "Pen", "Lip Ice", "Umbrella"
 ];
